@@ -1,0 +1,37 @@
+DOES NOT USE THIS FILE TO CREATE SCORES, THIS FILE IS ORIGINATED WHEN RUNNING gen_data.py
+
+[
+    {
+        "image_id": "num_image.jpg",
+        "category_id": int,
+        "keypoints": [x1, y1, conf1, ..., x17, y17, conf17], ---------> 17 points of skeleton
+        "score": float, ---------> ???????????????
+        "box": [x2, y2, x1, y1], -------> ????????????????????????????
+        "idx": 1 -------> Track index
+    }, ---------------------> One dictionary like this one for each pose in each image per idx
+    {
+        "image_id": "num_image.jpg",
+        "category_id": int,
+        "keypoints": [x1, y1, conf1, ..., x17, y17, conf17],
+        "score": float,
+        "box": [x2, y2, x1, y1],
+        "idx": 2
+    }
+    {
+        "image_id": "next_num_image.jpg",
+        "category_id": int,
+        "keypoints": [x1, y1, conf1, ..., x17, y17, conf17], ---------> 17 points of skeleton
+        "score": float,
+        "box": [x2, y2, x1, y1],
+        "idx": 1
+    },
+    {
+        "image_id": "next_num_image.jpg",
+        "category_id": int,
+        "keypoints": [x1, y1, conf1, ..., x17, y17, conf17],
+        "score": float,
+        "box": [x2, y2, x1, y1],
+        "idx": 2
+    },
+    ...
+] -----> list of dictionaries

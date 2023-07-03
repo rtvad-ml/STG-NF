@@ -1,0 +1,83 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "train_test_ShanghaiTech",
+            "type": "python",
+            "request": "launch",
+            "program": "train_eval.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--dataset=ShanghaiTech",
+            ]
+        },
+        {
+            "name": "test_only_ShanghaiTech",
+            "type": "python",
+            "request": "launch",
+            "program": "train_eval.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--dataset=ShanghaiTech",
+                "--checkpoint=checkpoints/ShanghaiTech_85_9.tar"
+            ]
+        },
+        {
+            "name": "train_test_UBnormal_Unsupervised",
+            "type": "python",
+            "request": "launch",
+            "program": "train_eval.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--dataset=UBnormal",
+                "--seg_len=16"
+            ]
+        },
+        {
+            "name": "test_only_UBnormal_Unsupervised",
+            "type": "python",
+            "request": "launch",
+            "program": "train_eval.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--dataset=UBnormal",
+                "--checkpoint=checkpoints/UBnormal_unsupervised_71_8.tar",
+                "--seg_len=16"
+            ]
+        },
+        {
+            "name": "train_test_UBnormal_Supervised",
+            "type": "python",
+            "request": "launch",
+            "program": "train_eval.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--dataset=UBnormal",
+                "--seg_len=16",
+                "--R=10"
+            ]
+        },
+        {
+            "name": "test_only_UBnormal_Supervised",
+            "type": "python",
+            "request": "launch",
+            "program": "train_eval.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--dataset=UBnormal",
+                "--checkpoint=checkpoints/UBnormal_supervised_79_2.tar",
+                "--seg_len=16",
+                "--R=10"
+            ]
+        },
+    ]
+}

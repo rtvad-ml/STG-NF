@@ -11,7 +11,10 @@ def init_args():
 
 
 def init_sub_args(args):
-    dataset = "UBnormal" if args.dataset == "UBnormal" else "ShanghaiTech"
+    if args.dataset in ['ShanghaiTech', 'ShanghaiTech-HR', 'UBnormal']:
+        dataset = "UBnormal" if args.dataset == "UBnormal" else "ShanghaiTech"
+    else:
+        dataset = args.dataset
     if args.vid_path_train and args.vid_path_test and args.pose_path_train and args.pose_path_test:
         args.vid_path = {'train': args.vid_path_train,
                          'test': args.vid_path_test}

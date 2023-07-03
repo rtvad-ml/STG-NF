@@ -171,7 +171,7 @@ def gen_dataset(person_json_root, num_clips=None, kp18_format=True, ret_keys=Fal
     if num_clips is not None:
         json_list = [json_list[num_clips]]  # For debugging purposes
     for person_dict_fn in tqdm(json_list):
-        if dataset == "UBnormal":
+        if dataset == "UBnormal":   # TODO account for different dataset configuration, not just Shanghai or UBnormal formats
             type, scene_id, clip_id = \
                 re.findall('(abnormal|normal)_scene_(\d+)_scenario(.*)_alphapose_.*', person_dict_fn)[0]
             clip_id = type + "_" + clip_id

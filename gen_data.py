@@ -44,8 +44,11 @@ def read_convert_write(in_full_fname, out_full_fname):
 
 
 def create_command(alphapose_dir, video_filename, out_dir, is_video=False):
-    command_args = {'cfg': os.path.join(alphapose_dir, 'configs/coco/resnet/256x192_res152_lr1e-3_1x-duc.yaml'),
-                    'checkpoint': os.path.join(alphapose_dir, 'pretrained_models/fast_421_res152_256x192.pth'),
+    # command_args = {'cfg': os.path.join(alphapose_dir, 'configs/coco/resnet/256x192_res152_lr1e-3_1x-duc.yaml'),
+    #                 'checkpoint': os.path.join(alphapose_dir, 'pretrained_models/fast_421_res152_256x192.pth'),
+    #                 'outdir': out_dir}
+    command_args = {'cfg': 'configs/coco/resnet/256x192_res152_lr1e-3_1x-duc.yaml',
+                    'checkpoint': 'pretrained_models/fast_421_res152_256x192.pth',
                     'outdir': out_dir}
 
     # command = "python ./AlphaPose/scripts/demo_inference.py"

@@ -1,0 +1,32 @@
+THIS IS THE ONLY FILE USED TO CREATE THE NORMALITY SCORES. THIS FILE IS ORIGINATED WHEN RUNNING gen_data.py
+
+{
+    "idx": {
+            "frame_num": {
+                          "keypoints": [x1, y1, conf1, ..., x17, y17, conf17], ---------> 17 points of skeleton,
+                          "scores": float ---------> ????????
+                         },
+            "next_frame_num: {
+                              "keypoints": [x1, y1, conf1, ..., x17, y17, conf17],
+                              "scores": float
+                             },
+             ...
+           },  --------------> One dictionary like this for each idx, containing all frames in which the idx was present
+    "other_idx": {
+                  "frame_num": {
+                                "keypoints": [x1, y1, conf1, ..., x17, y17, conf17],
+                                "scores": float
+                               },
+                    
+                   "next_frame_num: {
+                                     "keypoints": [x1, y1, conf1, ..., x17, y17, conf17],
+                                     "scores": float
+                                    },
+                    ...
+                 
+                 },
+    ...
+    ...
+    ...
+    ...
+}

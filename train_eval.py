@@ -1,6 +1,7 @@
 import random
 import numpy as np
 import torch
+import matplotlib.pyplot as plt
 from torch.utils.tensorboard import SummaryWriter
 from models.STG_NF.model_pose import STG_NF
 from models.training import Trainer
@@ -48,6 +49,8 @@ def main():
         dump_args(args, args.ckpt_dir)
 
     normality_scores = trainer.test()
+    plt.plot(normality_scores)
+    plt.show()
     auc, scores = score_dataset(normality_scores, dataset["test"].metadata, args=args)
 
     # Logging and recording results

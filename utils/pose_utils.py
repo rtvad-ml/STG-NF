@@ -71,20 +71,20 @@ def gen_clip_seg_data_np(clip_dict, start_ofst=0, seg_stride=4, seg_len=12, scen
     person_keys = {}
     for idx in sorted(clip_dict.keys(), key=lambda x: int(x)):
         sing_pose_np, sing_pose_meta, sing_pose_keys, sing_scores_np = single_pose_dict2np(clip_dict, idx)
-        if dataset == "UBnormal":
+        if dataset == "UBnormal":   # TODO account for different dataset configuration, not just Shanghai or UBnormal formats
             key = ('{:02d}_{}_{:02d}'.format(int(scene_id), clip_id, int(idx)))
         else:
             key = ('{:02d}_{:04d}_{:02d}'.format(int(scene_id), int(clip_id), int(idx)))
         person_keys[key] = sing_pose_keys
-        curr_pose_segs_np, curr_pose_segs_meta, curr_pose_score_np = split_pose_to_segments(sing_pose_np,
-                                                                                            sing_pose_meta,
-                                                                                            sing_pose_keys,
-                                                                                            start_ofst, seg_stride,
+        curr_pose_segs_np, curr_pose_segs_meta, curr_pose_score_np = split_pose_to_segments(sing_pose_np,  # shape == (number of frames, number of keypoints, data per keypoint(x, y, conf)) for current detected idx
+                                                                                            sing_pose_meta,  # list containing idx and first frame it appears
+                                                                                            sing_pose_keys,  # list containing all frame numbers (str) idx appears in
+                                                                                            start_ofst, seg_stride,  # offset and stride - Maybe: starting index and step to next index in frames
                                                                                             seg_len,
-                                                                                            scene_id=scene_id,
-                                                                                            clip_id=clip_id,
-                                                                                            single_score_np=sing_scores_np,
-                                                                                            dataset=dataset)
+                                                                                            scene_id=scene_id,  # ID of the scene (in name of .json file from dataset)
+                                                                                            clip_id=clip_id,  # ID of the clip (in name of .json file from dataset, different for UBnormal)
+                                                                                            single_score_np=sing_scores_np, # scores for each frame
+                                                                                            dataset=dataset)  # name of dataset
         pose_segs_data.append(curr_pose_segs_np)
         score_segs_data.append(curr_pose_score_np)
         if sing_pose_np.shape[0] > seg_len:
@@ -173,9 +173,12 @@ def split_pose_to_segments(single_pose_np, single_pose_meta, single_pose_keys, s
             curr_score = single_score_np[start_ind:start_ind + seg_len].reshape(1, seg_len)
             pose_segs_np = np.append(pose_segs_np, curr_segment, axis=0)
             pose_score_np = np.append(pose_score_np, curr_score, axis=0)
-            if dataset == "UBnormal":
+            if dataset == "UBnormal":   # TODO account for different dataset configuration, not just Shanghai or UBnormal formats
                 pose_segs_meta.append([int(scene_id), clip_id, int(single_pose_meta[0]), int(start_key)])
             else:
                 pose_segs_meta.append([int(scene_id), int(clip_id), int(single_pose_meta[0]), int(start_key)])
     return pose_segs_np, pose_segs_meta, pose_score_np
+    # pose_segs_np contains (number of groups of frames, size of group of frames, number of pose keypoints, data for each pose keypoint)
+    # pose_segs_meta is a list of lists. Each list contains [scene_id, clip_id, pose track index, frame number]
+    # pose_score_np contains pose scores for each frame
 
